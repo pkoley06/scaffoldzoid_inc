@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:scaffoldzoid_inc/screens/dashboard/buyer_home.dart';
 import 'package:scaffoldzoid_inc/screens/dashboard/seller_home.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/seller_profile.dart';
 import 'package:scaffoldzoid_inc/service/auth_service.dart';
 import 'package:scaffoldzoid_inc/utils/widget/navigator.dart';
 
@@ -111,10 +113,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50))),
                   onPressed: () async {
-                    final result = await AuthService().registerUser(
+                    final User? result = await AuthService().registerUser(
                         emailController.text, passwordController.text, context);
                     if (result != null) {
-                      navigatorScreenRemove(context, SellerHome());
+                      navigatorScreenRemove(
+                          context,
+                          SellerProfile(
+                            user: result,
+                          ));
                     }
                   },
                   child: const Text(

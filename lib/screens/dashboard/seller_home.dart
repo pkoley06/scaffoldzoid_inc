@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scaffoldzoid_inc/screens/registration/signup.dart';
+import 'package:scaffoldzoid_inc/service/auth_service.dart';
 import 'package:scaffoldzoid_inc/utils/widget/navigator.dart';
 
 class SellerHome extends StatefulWidget {
@@ -17,7 +19,8 @@ class _SellerHomeState extends State<SellerHome> {
           children: [
             ElevatedButton(
                 onPressed: () {
-                  navigatorScreenPop(context);
+                  AuthService().signOut();
+                  navigatorScreenRemove(context, SignUpScreen());
                 },
                 child: const Text("Sign out"))
           ],
