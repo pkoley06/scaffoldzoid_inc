@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "354786608004",
+    "project_id": "scaffoldzoid-inc-1ab45",
+    "storage_bucket": "scaffoldzoid-inc-1ab45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354786608004:android:28117a47733a5c91f8d3d1",
+        "android_client_info": {
+          "package_name": "com.example.scaffoldzoid_inc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354786608004-04ruqdflphd5gt10gt3m82et9r8uu2nf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.scaffoldzoid_inc",
+            "certificate_hash": "5d7d0bcd10d416dbb200769108ebbe6a56f87885"
+          }
+        },
+        {
+          "client_id": "354786608004-aoi738kea1ao3broc3nic3qghueu6qpj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvNVHaQhD_02O4W-U5Fe19fm6A2VCL-Ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354786608004-aoi738kea1ao3broc3nic3qghueu6qpj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
