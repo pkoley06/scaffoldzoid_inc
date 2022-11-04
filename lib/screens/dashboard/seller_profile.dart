@@ -1,20 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/product_page.dart';
 import 'package:scaffoldzoid_inc/screens/dashboard/seller_home.dart';
 import 'package:scaffoldzoid_inc/service/firestore_service.dart';
 import 'package:scaffoldzoid_inc/utils/widget/navigator.dart';
 
-class SellerProfile extends StatefulWidget {
+class SellerProfile extends StatelessWidget {
   final User user;
-  const SellerProfile({super.key, required this.user});
+  SellerProfile({super.key, required this.user});
 
-  @override
-  State<SellerProfile> createState() => _SellerProfileState();
-}
-
-class _SellerProfileState extends State<SellerProfile> {
   TextEditingController nameController = TextEditingController();
+
   TextEditingController aboutController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,9 +90,9 @@ class _SellerProfileState extends State<SellerProfile> {
                         await FireStoreService().insertNameAbout(
                             nameController.text,
                             aboutController.text,
-                            widget.user.uid);
+                            user.uid);
                         // ignore: use_build_context_synchronously
-                        navigatorScreen(context, SellerHome());
+                        navigatorScreen(context, ProductScreen(user));
                       }
                     },
                     child: const Text(
