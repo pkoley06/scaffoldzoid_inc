@@ -14,12 +14,12 @@ class FireStoreService {
     }
   }
 
-  Future addProduct(String productName, String productCount,
-      String productPrice, String userId) async {
+  Future addProduct(String sellerName, String productName, String productPrice,
+      String userId) async {
     try {
       await firebaseFirestore.collection('product').add({
+        'sellerName': sellerName,
         'productName': productName,
-        'productCount': productCount,
         'productPrice': productPrice,
         'userId': userId
       });

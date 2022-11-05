@@ -30,6 +30,11 @@ class ProductScreen extends StatelessWidget {
           ),
         ),
         appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            "Product List",
+            style: TextStyle(fontSize: 20, color: Colors.black),
+          ),
           backgroundColor: Colors.white,
           elevation: 0,
         ),
@@ -53,6 +58,10 @@ class ProductScreen extends StatelessWidget {
                       child: ListTile(
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 10),
+                        leading: Text(
+                          "\$ ${productModel.productPrice} /kg",
+                          style: TextStyle(color: Colors.white),
+                        ),
                         title: Text(
                           productModel.productName.toUpperCase(),
                           style: const TextStyle(
@@ -60,8 +69,7 @@ class ProductScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-                        subtitle: Text(
-                            "${productModel.productPrice + productModel.productCount}",
+                        subtitle: Text("Seller - ${productModel.sellerName}",
                             style: TextStyle(color: Colors.white)),
                       ),
                     );
