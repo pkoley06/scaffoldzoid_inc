@@ -13,4 +13,18 @@ class FireStoreService {
       print(error);
     }
   }
+
+  Future addProduct(String productName, String productCount,
+      String productPrice, String userId) async {
+    try {
+      await firebaseFirestore.collection('product').add({
+        'productName': productName,
+        'productCount': productCount,
+        'productPrice': productPrice,
+        'userId': userId
+      });
+    } catch (error) {
+      print(error);
+    }
+  }
 }
