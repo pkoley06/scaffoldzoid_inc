@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scaffoldzoid_inc/screens/dashboard/buyer/buyer_home.dart';
+import 'package:scaffoldzoid_inc/screens/registration/signup.dart';
 import 'package:scaffoldzoid_inc/service/auth_service.dart';
 import 'package:scaffoldzoid_inc/utils/widget/navigator.dart';
 
@@ -139,11 +140,17 @@ class _LogInScreenState extends State<LogInScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text("Don't have an account? "),
-                  Text(
-                    "Sign Up",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                children: [
+                  const Text("Don't have an account? "),
+                  GestureDetector(
+                    onTap: () {
+                      navigatorScreenRemove(context, SignUpScreen());
+                    },
+                    child: const Text(
+                      "Sign Up",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
                   )
                 ],
               )
