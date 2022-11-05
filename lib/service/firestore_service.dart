@@ -27,4 +27,25 @@ class FireStoreService {
       print(error);
     }
   }
+
+  Future updateProduct(String docId, String sellerName, String productName,
+      String productPrice) async {
+    try {
+      await firebaseFirestore.collection('product').doc(docId).update({
+        'sellerName': sellerName,
+        'productName': productName,
+        'productPrice': productPrice,
+      });
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future deleteProduct(String docId) async {
+    try {
+      await firebaseFirestore.collection('product').doc(docId).delete();
+    } catch (error) {
+      print(error);
+    }
+  }
 }

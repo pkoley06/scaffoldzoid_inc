@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:scaffoldzoid_inc/model/product_model.dart';
-import 'package:scaffoldzoid_inc/screens/dashboard/add_product.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/seller/add_product.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/seller/update_product.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/welcome.dart';
+import 'package:scaffoldzoid_inc/service/auth_service.dart';
 import 'package:scaffoldzoid_inc/utils/widget/navigator.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -37,6 +40,38 @@ class ProductScreen extends StatelessWidget {
           ),
           backgroundColor: Colors.white,
           elevation: 0,
+          actions: [
+            IconButton(
+                color: Colors.black,
+                onPressed: () async {
+                  // ignore: use_build_context_synchronously
+
+                  showDialog(
+                      context: context,
+                      builder: ((BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Please Confirm"),
+                          content: const Text("Are you sure to log out?"),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text("No")),
+                            TextButton(
+                                onPressed: () async {
+                                  await AuthService().signOut();
+                                  // ignore: use_build_context_synchronously
+                                  navigatorScreenRemove(
+                                      context, WelcomeScreen());
+                                },
+                                child: const Text("Yes"))
+                          ],
+                        );
+                      }));
+                },
+                icon: const Icon(Icons.logout)),
+          ],
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
@@ -56,6 +91,9 @@ class ProductScreen extends StatelessWidget {
                       elevation: 5,
                       margin: const EdgeInsets.all(20),
                       child: ListTile(
+                        onTap: () {
+                          navigatorScreen(context, UpdateProduct(productModel));
+                        },
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 10),
                         leading: Text(
@@ -77,7 +115,7 @@ class ProductScreen extends StatelessWidget {
                 );
               }
             }
-            return const Center(child: Text('No notes !'));
+            return const Center(child: Text('No products !'));
           },
         ));
   }

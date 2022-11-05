@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scaffoldzoid_inc/screens/dashboard/product_page.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/seller/product_page.dart';
 import 'package:scaffoldzoid_inc/service/firestore_service.dart';
 import 'package:scaffoldzoid_inc/utils/widget/navigator.dart';
 
