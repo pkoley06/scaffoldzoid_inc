@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/buyer/buyer_home.dart';
+import 'package:scaffoldzoid_inc/service/auth_service.dart';
 import 'package:scaffoldzoid_inc/utils/widget/navigator.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -10,7 +12,7 @@ class LogInScreen extends StatefulWidget {
 
 class _LogInScreenState extends State<LogInScreen> {
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       height: 20,
                     ),
                     TextFormField(
-                      controller: passwordcontroller,
+                      controller: passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                           label: Text("Password"),
@@ -111,7 +113,20 @@ class _LogInScreenState extends State<LogInScreen> {
                       backgroundColor: Colors.purple,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50))),
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (emailController.text == "" ||
+                        passwordController.text == "") {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("All Fields are required !"),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
+                    final result = await AuthService().logInUser(
+                        emailController.text, passwordController.text, context);
+                    if (result != null) {
+                      navigatorScreenRemove(context, BuyerHome());
+                    }
+                  },
                   child: const Text(
                     "Buyer Login",
                     style: TextStyle(fontSize: 18),

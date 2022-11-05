@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scaffoldzoid_inc/screens/dashboard/buyer_home.dart';
-import 'package:scaffoldzoid_inc/screens/dashboard/seller_profile.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/buyer/buyer_home.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/seller/seller_profile.dart';
 import 'package:scaffoldzoid_inc/service/auth_service.dart';
 import 'package:scaffoldzoid_inc/utils/widget/navigator.dart';
 
@@ -15,7 +15,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordcontroller = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                     // confirm password field
                     TextFormField(
-                      controller: confirmPasswordcontroller,
+                      controller: confirmPasswordController,
                       obscureText: true,
                       decoration: InputDecoration(
                           label: const Text("Confirm password"),
@@ -146,6 +146,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50))),
                   onPressed: () async {
+                    if (emailController.text == "" ||
+                        passwordController.text == "") {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("All Fields are required !"),
+                        backgroundColor: Colors.red,
+                      ));
+                    } else if (passwordController.text !=
+                        confirmPasswordController.text) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Passowrd doesn't match !"),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
                     final result = await AuthService().registerUser(
                         emailController.text, passwordController.text, context);
                     print(result);
