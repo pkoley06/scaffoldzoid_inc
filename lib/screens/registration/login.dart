@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scaffoldzoid_inc/screens/dashboard/buyer/buyer_home.dart';
+import 'package:scaffoldzoid_inc/screens/dashboard/seller/seller_profile.dart';
 import 'package:scaffoldzoid_inc/screens/registration/signup.dart';
 import 'package:scaffoldzoid_inc/service/auth_service.dart';
 import 'package:scaffoldzoid_inc/utils/widget/navigator.dart';
@@ -17,6 +19,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -90,7 +93,21 @@ class _LogInScreenState extends State<LogInScreen> {
                       backgroundColor: Colors.amber.shade600,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50))),
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (emailController.text == "" ||
+                        passwordController.text == "") {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("All Fields are required !"),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
+                    final result = await authService.logInUser(
+                        emailController.text, passwordController.text, context);
+                    if (result != null) {
+                      navigatorScreenRemove(
+                          context, SellerProfile(user: result));
+                    }
+                  },
                   child: const Text(
                     "Seller Login",
                     style: TextStyle(fontSize: 18),
@@ -122,7 +139,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         backgroundColor: Colors.red,
                       ));
                     }
-                    final result = await AuthService().logInUser(
+                    final result = await authService.logInUser(
                         emailController.text, passwordController.text, context);
                     if (result != null) {
                       navigatorScreenRemove(context, BuyerHome());
